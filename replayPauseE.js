@@ -106,7 +106,7 @@ window.replayPauseE.runCodeAfter = function() {
     }
 
     // pause mod
-    if(e.code === "KeyQ"){
+    if(e.code === "Backquote"){
       window.pauseGame = !window.pauseGame;
       if(window.pauseGame){
         document.querySelector("body > div.Czus3 > div > div.wjOYOd").style.visibility = "visible";
@@ -122,4 +122,5 @@ window.replayPauseE.runCodeAfter = function() {
   }
 
   document.addEventListener('keydown', keydownHandler);
+
 }
