@@ -3,7 +3,7 @@ window.snakeabakeTas.runCodeBefore = function() {
   // for logging the game's time
   window.gameNow = 0;
   window.gameStartTime = 0;
-  window.gameInputs = [
+  const gameInputsInit = [
     1,
     1,
     1,
@@ -60,7 +60,8 @@ window.snakeabakeTas.runCodeBefore = function() {
     2,
     2,
     3
-  ];
+  ]
+  window.gameInputs = gameInputsInit;
   window.direction = "NONE";
   window.setDirection = "NONE";
   window.endRecording = 1;
@@ -69,7 +70,7 @@ window.snakeabakeTas.runCodeBefore = function() {
 
   // list of apple spawns
   window.appleSpawnNum = -1;
-  window.appleSpawnList = [
+  const appleSpawnListInit = [
     [0,0],
     [0,2],
     [0,3],
@@ -96,23 +97,25 @@ window.snakeabakeTas.runCodeBefore = function() {
     [7,8],
     [6,2],
     [8,5],
-    [9,6], //spawned on 4th apple eaten
+    [9,6],
     [3,5],
     [6,1],
     [4,6],
     [7,0],
     [5,6]
   ];
+  window.appleSpawnList = appleSpawnListInit;
 
   // list of wall spawns
   window.wallSpawnNum = -1;
-  window.wallSpawnList = [
+  const wallSpawnListInit = [
     [8,7],
     [8,1],
     [5,4],
     [5,1],
     [8,4]
   ];
+  window.wallSpawnList = wallSpawnListInit;
 
   // current score element
   window.currentScore = document.querySelector("body > div.Czus3 > div > div.sEOCsb > div.MNu4v > div:nth-child(2)");
@@ -233,6 +236,105 @@ window.snakeabakeTas.runCodeAfter = function() {
       ESC: 27
   };
   // key simulating functions ^^^^^^^^^
+  const gameInputsInit = [
+    1,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    3,
+    2,
+    2,
+    3,
+    3,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    1,
+    2,
+    2,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    3
+  ];
+  const appleSpawnListInit = [
+    [0,0],
+    [0,2],
+    [0,3],
+    [0,4],
+    [0,5],
+    [0,6],
+    [0,8],
+    [1,1],
+    [1,2],
+    [1,3],
+    [1,4],
+    [1,5],
+    [1,6],
+    [1,7],
+    [2,0],
+    [2,1],
+    [2,2],
+    [2,3],
+    [3,0],
+    [3,1],
+    [3,2],
+    [3,3],
+    [4,7],
+    [7,8],
+    [6,2],
+    [8,5],
+    [9,6],
+    [3,5],
+    [6,1],
+    [4,6],
+    [7,0],
+    [5,6]
+  ];
+  const wallSpawnListInit = [
+    [8,7],
+    [8,1],
+    [5,4],
+    [5,1],
+    [8,4]
+  ];
 
   // using the timer
   let time_element = document.querySelector("body > div.Czus3 > div > div.sEOCsb > div.A2vT0 > div.Jc72He.gmwAbc");
@@ -243,12 +345,13 @@ window.snakeabakeTas.runCodeAfter = function() {
 
   window.startRecording= function(){
     window.endRecording = 0;
-    window.gameInputs = [];
+    window.gameInputs = [...gameInputsInit];
     window.appleSpawnNum = -1;
-    window.appleSpawnList = [];
+    window.appleSpawnList = [...appleSpawnListInit];
     window.wallSpawnNum = -1;
-    window.wallSpawnList = [];
-    let lastTickVal = 0;
+    window.wallSpawnList = [...wallSpawnListInit];
+
+    let lastTickVal = Math.floor((timeToSeconds(time_element.textContent))/.135);
     let a = setInterval(()=>{
       let currentTickVal = Math.floor((timeToSeconds(time_element.textContent))/.135);
       if(currentTickVal===lastTickVal+1){
@@ -279,6 +382,10 @@ window.snakeabakeTas.runCodeAfter = function() {
         clearInterval(abc);
         window.playBackActive = 0;
         console.log("playback ended");
+        if(window.gameInputs.length===gameInputsInit.length){
+          console.log('recording started');
+          window.startRecording();
+        }
       }
       doMovement(window.gameInputs[i]);
       i++;
@@ -314,15 +421,30 @@ window.snakeabakeTas.runCodeAfter = function() {
       console.log("recording disabled");
     }
     if(e.code === "Digit2"){
-      /*
+      
       console.log("recording ended");
       window.endRecording = 1;
-      */
-      console.log("recording disabled");
+      
+      //console.log("recording disabled");
+    }
+    if(e.code === "Digit5"){
+      console.log("playback started");
+      playBack();
+    }
+    if(e.code === "Digit4"){
+      console.log(window.gameInputs);
+      console.log(appleSpawnNum);
+      console.log(appleSpawnList);
     }
     if(e.code === "Digit3"){
       console.log("playback started");
       playBack();
+      window.endRecording = 0;
+      window.gameInputs = [...gameInputsInit];
+      window.appleSpawnNum = -1;
+      window.appleSpawnList = [...appleSpawnListInit];
+      window.wallSpawnNum = -1;
+      window.wallSpawnList = [...wallSpawnListInit];
     }
 
     // pause mod
@@ -342,5 +464,4 @@ window.snakeabakeTas.runCodeAfter = function() {
   }
 
   document.addEventListener('keydown', keydownHandler);
-
 }
