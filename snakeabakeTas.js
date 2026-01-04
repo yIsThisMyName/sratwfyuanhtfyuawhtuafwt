@@ -437,9 +437,10 @@ window.snakeabakeTas.runCodeAfter = function() {
       console.log(appleSpawnList);
     }
     if(e.code === "Digit3"){
+      console.log("recording ended");
+      window.endRecording = 1;
       console.log("playback started");
       playBack();
-      window.endRecording = 0;
       window.gameInputs = [...gameInputsInit];
       window.appleSpawnNum = -1;
       window.appleSpawnList = [...appleSpawnListInit];
