@@ -428,6 +428,8 @@ window.snakeabakeTas.runCodeAfter = function() {
       //console.log("recording disabled");
     }
     if(e.code === "Digit5"){
+      console.log("recording ended");
+      window.endRecording = 1;
       console.log("playback started");
       playBack();
     }
