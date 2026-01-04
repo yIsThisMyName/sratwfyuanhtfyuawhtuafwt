@@ -134,7 +134,7 @@ window.snakeabakeTas.alterSnakeCode = function(code) {
   code = assertReplace(
     code,
     /2\s*\)\s*&&\s*!f\s*&&\s*e\s*;/,
-    '2)&&!f&&e;if(window.currentScore.textContent<25){c.push(new _.Bl(0,1));c.push(new _.Bl(1,0));c.push(new _.Bl(0,7));c.push(new _.Bl(1,8));}'
+    '2)&&!f&&e;if(window.currentScore.textContent<40){c.push(new _.Bl(0,1));c.push(new _.Bl(1,0));c.push(new _.Bl(0,7));c.push(new _.Bl(1,8));}'
   );
 
   // oh.x and oh.y are the wall spawn coords (u can edit them)
@@ -342,4 +342,5 @@ window.snakeabakeTas.runCodeAfter = function() {
   }
 
   document.addEventListener('keydown', keydownHandler);
+
 }
