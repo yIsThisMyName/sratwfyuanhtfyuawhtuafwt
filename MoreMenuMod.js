@@ -396,7 +396,7 @@ window.moreMenu = {
         `default:${e}=256}`,
         `
         case 3:
-          ${e} = (window.customWidth*window.customHeight)
+          ${e} = ${(window.customWidth*window.customHeight)}
           break
         case 4:
           ${e} = 42
@@ -430,7 +430,7 @@ window.moreMenu = {
           21)
           break
         case 3:
-          ${sizeHolder} = { width: window.customWidth, height: window.customHeight }
+          ${sizeHolder} = { width: ${window.customWidth}, height: ${window.customHeight} }
           break
         case 4:
           ${sizeHolder} = { width: 7, height: 6 }
