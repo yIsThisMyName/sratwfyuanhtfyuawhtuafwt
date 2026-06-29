@@ -432,7 +432,7 @@ window.isakfanMod.runCodeAfter = function() {
   }
 
 
-    const BASE64_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    const BASE64_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-";
 
     function randomBase64String(length = 6) {
         let result = "";
